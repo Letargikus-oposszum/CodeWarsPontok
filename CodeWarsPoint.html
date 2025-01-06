@@ -98,21 +98,17 @@
     const clearUsersButton = document.getElementById("clear-users");
     const usernameInput = document.getElementById("username");
 
-    // Load dark mode state and existing users from localStorage
     document.body.classList.toggle("dark-mode", localStorage.getItem("theme") === "dark");
     const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-    // Render stored users on page load
     storedUsers.forEach(user => createUserCard(user));
 
-    // Toggle dark/light mode
     toggleThemeButton.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
       const isDarkMode = document.body.classList.contains("dark-mode");
       localStorage.setItem("theme", isDarkMode ? "dark" : "light");
     });
 
-    // Fetch user data from Codewars API
     fetchUserButton.addEventListener("click", () => {
       const username = usernameInput.value.trim();
       if (!username) {
@@ -136,13 +132,11 @@
         .catch(error => alert(error.message));
     });
 
-    // Clear all user cards
     clearUsersButton.addEventListener("click", () => {
       userCardsContainer.innerHTML = "";
       localStorage.removeItem("users");
     });
 
-    // Create user card and append to DOM
     function createUserCard(user) {
       const card = document.createElement("div");
       card.className = "card";
